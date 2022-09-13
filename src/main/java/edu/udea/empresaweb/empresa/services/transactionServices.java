@@ -62,7 +62,7 @@ import java.util.Optional;
         return transactionRepository.save(transaction);
     }
 
-    public Boolean deleteEnterprise(Long id){
+    public Boolean deleteTransaction(Long id){
         try{
             this.transactionRepository.deleteById(id);
             return true;

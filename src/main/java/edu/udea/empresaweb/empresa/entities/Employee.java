@@ -2,9 +2,11 @@ package edu.udea.empresaweb.empresa.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 //import java.validation.constraints.NotNull;
 
 @Data
@@ -21,6 +23,7 @@ public class Employee {
     private String email;
     
     @OneToOne(optional = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "employee")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "Idprofile")
     private Profile profile;
     
@@ -35,7 +38,15 @@ public class Employee {
     private LocalDate updateAt;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "id_enterprise")
     private Enterprise enterprise;
+
+    /*@OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Transaction> transactions;
+
+     */
 
    
 

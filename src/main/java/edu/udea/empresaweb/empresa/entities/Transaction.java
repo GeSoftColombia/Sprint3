@@ -2,6 +2,7 @@ package edu.udea.empresaweb.empresa.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -23,13 +24,17 @@ public class Transaction {
     @Column(name = "account")
     private Long account;
 
-    @ManyToOne
-    @JoinColumn(name="employee_id")
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name="id_employee")
     private Employee employee;
     //@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     //private List<Employee> user;
 
-    @ManyToOne
+
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "id_enterprise")
     private Enterprise enterprise;
     
