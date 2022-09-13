@@ -12,6 +12,7 @@ import java.util.Map;
 
 
 @RestController
+@RequestMapping("/enterprises/{id}/movements")
 
     public class TransactionController {
     @Autowired
@@ -21,38 +22,38 @@ import java.util.Map;
         this.service = service;
     }
 
-    @GetMapping("/enterprises/{id}/movements")
-    public List<Transaction> getAllTransaction(@PathVariable("id") long id){
+    @GetMapping
+    public List<Transaction> getAllTransaction(@PathVariable("idM") long id){
         return this.service.getAllTransaction(id);
     }
 
-    @GetMapping("/enterprises/{id}/movements/{idM}")
+    @GetMapping(value = "/{idM}")
     public Transaction getTransaction(@PathVariable("idM") long idM){
         return (Transaction) this.service.getTransaction(idM);
     }
 
-    @PostMapping("/enterprises/{id}/movements")
+    @PostMapping
     public Transaction createTransaction(@RequestBody Transaction transaction){
         return this.service.createTransaction(transaction);
     }
 
     @PutMapping
     @ExceptionHandler
-    public Transaction updateTransaction(@PathVariable("id") long id, @RequestBody Transaction transaction){
+    public Transaction updateTransaction(@PathVariable("idM") long id, @RequestBody Transaction transaction){
         return this.service.updateTransaction(id, transaction);
     }
 
 
-    @PatchMapping("/enterprises/{id}/movements")
-    public Transaction patchTransaction(@PathVariable("id") Long id, @RequestBody Map<Object, Object> objectMap){
+    @PatchMapping(value = "/{idM}")
+    public Transaction patchTransaction(@PathVariable("idM") Long id, @RequestBody Map<Object, Object> objectMap){
         return this.service.patchTransaction(id, objectMap);
     }
 
 
 
-    @DeleteMapping("/enterprises/{id}/movements")
-    public Boolean deleteEnterprise(@PathVariable("id") long id) {
-        return this.service.deleteEnterprise(id);
+    @DeleteMapping(value = "/{idM}")
+    public Boolean deleteTransaction(@PathVariable("idM") long id) {
+        return this.service.deleteTransaction(id);
     }
 
 }

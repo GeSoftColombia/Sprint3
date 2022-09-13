@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/users")
 public class EmployeeController {
     @Autowired
     employeeServices service;
@@ -18,36 +19,35 @@ public class EmployeeController {
         this.service = service;
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public List<Employee> getEmployee(){
         return this.service.getEmployee();
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping(value = "/{id}")
     public Employee getEmployee(@PathVariable("id") long id){
         return this.service.getEmployee(id);
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public Employee createEmployee(@RequestBody Employee employee){
         return this.service.createEmployee(employee);
     }
 
-    @PutMapping("/user/{id}")
-    @ExceptionHandler
+    @PutMapping(value = "/{id}")
     public Employee updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee){
         return this.service.updateEmployee(id, employee);
     }
 
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping(value = "/{id}")
     public Employee patchEmployee(@PathVariable("id") Long id, @RequestBody Map<Object, Object> objectMap){
         return this.service.patchEmployee(id, objectMap);
     }
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public Boolean deleteEmployee(@PathVariable("id") long id) {
         return this.service.deleteEmployee(id);
     }
